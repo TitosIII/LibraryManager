@@ -55,8 +55,10 @@ public class Biblioteca{
 
         System.out.println("\nIngrese valor por dia.");
         int value = in.nextInt();
+        in.nextLine();
         System.out.println("\nIngrese Numero de Paginas.");
         int noPag = in.nextInt();
+        in.nextLine();
 
         lista.add(new Libro(title, autor, edit, gen, value, noPag));
         System.out.println("Usuario registrado!!!\n"+lista.get(lista.size() - 1));
@@ -75,6 +77,7 @@ public class Biblioteca{
             System.out.println("Seleccione un cliente:\n");
             Cliente.mostrarClientes(c);
             opc = in.nextInt();
+            in.nextLine();
 
             if(opc < 1 || opc > c.size()){
                 System.out.println("Opcion no valida.\n");
@@ -92,6 +95,7 @@ public class Biblioteca{
                                 2.-Prestar mas de un libro.
                                 """);
             opc = in.nextInt();
+            in.nextLine();
 
             if(opc != 1 || opc != 2){
                 System.out.println("Opcion no valida.\n");
@@ -107,6 +111,7 @@ public class Biblioteca{
                 System.out.println("Elige una opcion.\n 0.-Terminar seleccion.");
                 Libro.mostrarLibros(l);
                 opc = in.nextInt();
+                in.nextLine();
 
                 if(opc == 0){
                     if(libros.isEmpty()){
@@ -135,6 +140,7 @@ public class Biblioteca{
             System.out.println("Elige una opcion.\n 0.-Terminar seleccion.");
             Libro.mostrarLibros(l);
             opc = in.nextInt();
+            in.nextLine();
             if(opc < 0 || opc > l.size()){
                 System.out.println("Opcion no valida.\n");
                 continue;
@@ -160,6 +166,7 @@ public class Biblioteca{
             System.out.println("Seleccione un cliente:\n");
             Cliente.mostrarClientes(c);
             opc = in.nextInt();
+            in.nextLine();
 
             if(opc < 1 || opc > c.size()){
                 System.out.println("Opcion no valida.\n");
@@ -181,6 +188,7 @@ public class Biblioteca{
                                 3.-Recibir todos los libros.
                                 """);
             opc = in.nextInt();
+            in.nextLine();
 
             if(opc < 1 || opc > 3){
                 System.out.println("Opcion no valida.\n");
@@ -196,6 +204,7 @@ public class Biblioteca{
                 System.out.println("Elige una opcion.\n 0.-Terminar seleccion.");
                 Libro.mostrarLibros(lista);
                 opc = in.nextInt();
+                in.nextLine();
 
                 if(opc == 0){
                     if(libros.isEmpty()){
@@ -232,6 +241,7 @@ public class Biblioteca{
             System.out.println("Elige una opcion.\n 0.-Terminar seleccion.");
             Libro.mostrarLibros(lista);
             opc = in.nextInt();
+            in.nextLine();
             if(opc < 0 || opc > lista.size()){
                 System.out.println("Opcion no valida.\n");
                 continue;
@@ -279,6 +289,7 @@ public class Biblioteca{
                                8.-Mostrar clientes.
                                9.-Salir.""");
             control = in.nextByte();
+            in.nextLine();
             switch (control) {
                 case 1 -> addGenero();
 
