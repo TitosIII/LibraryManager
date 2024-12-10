@@ -1,6 +1,4 @@
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -292,10 +290,6 @@ public class Biblioteca{
 
         ArrayList<Libro> libros = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
-
-        ObjectInputStream reader;
-        ObjectOutputStream writterL = null;
-        ObjectOutputStream writterC = null;
 
         while(flag){
             System.out.println("""
