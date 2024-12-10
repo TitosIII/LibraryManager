@@ -1,13 +1,15 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public final class Cliente{
+public final class Cliente implements Serializable{
     private static int noClientes = 0;
 
     private final String idCliente;
     private final String nombres;
     private final String apellidos;
     private final ArrayList<Libro> libros = new ArrayList<>();
+    private boolean posesion = false;
     private int librosLeidos;
     private double deuda;
 
@@ -30,6 +32,7 @@ public final class Cliente{
     public void tomarLibro(Libro libro, Date fecha){
         libro.prestar(fecha);
         libros.add(libro);
+        posesion = true;
     }
 
     public void tomarLibros(ArrayList<Libro> lista, Date fecha){
@@ -37,11 +40,15 @@ public final class Cliente{
             var.prestar(fecha);
             libros.add(var);
         }
+        posesion = true;
     }
 
     public void regresarLibro(Libro libro, Date fecha){
         endeudar(libro.regresar(fecha));
         libros.remove(libros.indexOf(libro));
+        if(libros.isEmpty()){
+            posesion = false;
+        }
     }
 
     public void regresarLibros(ArrayList<Libro> lista, Date fecha){
@@ -51,6 +58,9 @@ public final class Cliente{
             libros.remove(libro);
         }
         endeudar(total);
+        if(libros.isEmpty()){
+            posesion = false;
+        }
     }
 
     public void regresarLibros(Date fecha){
@@ -59,22 +69,25 @@ public final class Cliente{
             total += libro.regresar(fecha);
         }
         endeudar(total);
+        posesion = false;
     }
 
     private void endeudar(double extra){
         deuda += extra;
     }
 
-    public void pagarDeuda(){
-        deuda = 0;
-    }
-
     public boolean pagarDeuda(double pago){
         if(pago < deuda){
             deuda -= pago;
+            System.out.println("Pago realizado." + ((deuda == 0)? "\nDeuda absuelta...": ""));
             return true;
         }
+        System.out.println("Error: El monto es mayor al de la deuda.");
         return false;
+    }
+
+    public boolean hasABook(){
+        return posesion;
     }
 
     public ArrayList<Libro> getLibros(){

@@ -50,7 +50,7 @@ public class Biblioteca{
         String autor = in.nextLine();
         System.out.println("\nIngrese Editorial.");
         String edit = in.nextLine();
-        System.out.println("\nIngrese Autor.");
+        System.out.println("\nIngrese Genero.");
         String gen = in.nextLine();
 
         System.out.println("\nIngrese valor por dia.");
@@ -61,13 +61,22 @@ public class Biblioteca{
         in.nextLine();
 
         lista.add(new Libro(title, autor, edit, gen, value, noPag));
-        System.out.println("Usuario registrado!!!\n"+lista.get(lista.size() - 1));
+        System.out.println("Libro registrado!!!\n"+lista.get(lista.size() - 1));
     }
 
-    private static void prestar(ArrayList<Cliente> c, ArrayList<Libro> l){
+    private static void prestar(ArrayList<Cliente> listaC, ArrayList<Libro> listaL){
+        ArrayList<Cliente> c = (ArrayList<Cliente>) listaC.clone();
+        ArrayList<Libro> l = (ArrayList<Libro>) listaL.clone();
         ///Confirmar si hay clientes y libros.
+        ArrayList<Libro> removal = new ArrayList<>();
+        for(Libro unLibro: l){
+            if(unLibro.someoneHasIt()){
+                removal.add(unLibro);
+            }
+        }
+        l.removeAll(removal);
         if(c.isEmpty() || l.isEmpty()){
-            System.out.println("No hay clientes y/o libros registrados...");
+            System.out.println("No hay clientes registrados y/o libros para prestar...");
             return;
         }
 
@@ -86,7 +95,7 @@ public class Biblioteca{
             break;
         }
 
-        Cliente aux = c.get(opc);
+        Cliente aux = c.get(opc - 1);
 
         while (true) {
             System.out.println("""
@@ -97,7 +106,7 @@ public class Biblioteca{
             opc = in.nextInt();
             in.nextLine();
 
-            if(opc != 1 || opc != 2){
+            if(opc != 1 && opc != 2){
                 System.out.println("Opcion no valida.\n");
                 continue;
             }
@@ -153,10 +162,18 @@ public class Biblioteca{
 
     }
 
-    private static void recibir(ArrayList<Cliente> c){
+    private static void recibir(ArrayList<Cliente> listaC){
+        ArrayList<Cliente> c = (ArrayList<Cliente>) listaC.clone();
         ///Confirmar si hay clientes y libros.
+        ArrayList<Cliente> removal = new ArrayList<>();
+        for(Cliente cliente: c){
+            if(!cliente.hasABook()){
+                removal.add(cliente);
+            }
+        }
+        c.removeAll(removal);
         if(c.isEmpty()){
-            System.out.println("No hay clientes...");
+            System.out.println("No hay libros prestados...");
             return;
         }
 
@@ -278,7 +295,7 @@ public class Biblioteca{
 
         while(flag){
             System.out.println("""
-                               Elige una opcion:
+                               \nElige una opcion:
                                1.-Registrar Genero Literario.
                                2.-Registrar un cliente.
                                3.-Registrar un libro.

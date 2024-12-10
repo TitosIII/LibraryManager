@@ -1,8 +1,9 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Libro{
+public class Libro implements Serializable{
     private static int NoLibros = 0;
     private static ArrayList<String> generos = new ArrayList<>();
 
@@ -49,7 +50,7 @@ public class Libro{
     }
 
     public static int addGenero(String name){
-        if(generos.indexOf(name) < 0){
+        if(generos.indexOf(name) >= 0){
             System.out.println("El genero ya esta registrado.");
             return -1;
         }
@@ -82,6 +83,9 @@ public class Libro{
         return deuda;
     }
 
+    public boolean someoneHasIt(){
+        return prestado;
+    }
     @Override
     public String toString(){
         return "\nTitulo: "+ Titulo
