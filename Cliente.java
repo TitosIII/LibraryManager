@@ -97,7 +97,8 @@ public final class Cliente implements Serializable{
     public String toString(){
         return "\nID del cliente: "+ idCliente
         + "\nNombre: " + nombres + " " + apellidos
-        + "\nNumero de libros leidos: " + librosLeidos;
+        + "\nNumero de libros leidos: " + librosLeidos
+        + "\nDeuda: " + deuda;
     }
 
 }
